@@ -16,7 +16,13 @@
     let secretNumber;
 
     function setNumber() {
+      // Перевірка, чи вибрано число
       secretNumber = parseInt(document.getElementById('userNumber').value);
+      if (isNaN(secretNumber)) {
+        alert('Будь ласка, виберіть число.');
+        return;
+      }
+
       alert('Число записано! Тепер інша людина повинна вгадати його.');
       document.getElementById('guessDiv').style.display = 'block'; // Показуємо форму для вгадування
       document.getElementById('setDiv').style.display = 'none'; // Ховаємо форму для запису числа
@@ -27,6 +33,12 @@
     function guessNumber() {
       let guess = parseInt(document.getElementById('guess').value);
       let resultDiv = document.getElementById('result');
+
+      if (isNaN(guess)) {
+        resultDiv.textContent = 'Будь ласка, виберіть число для вгадування!';
+        resultDiv.className = 'incorrect';
+        return;
+      }
 
       if (guess === secretNumber) {
         resultDiv.textContent = 'Правильно! Число вгадано.';
